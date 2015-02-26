@@ -1,6 +1,6 @@
 # Kienaide
 
-TODO: Write a gem description
+Protect your record.
 
 ## Installation
 
@@ -20,7 +20,31 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Add protected boolean column.
+
+```
+class AddProtectedToPost< ActiveRecord::Migration
+  def change
+    change_column :posts, :protected, :boolean, null: false, default: false
+  end
+end
+```
+
+Add 'kienaide' to your class.
+
+```
+class Post < ActiveRecord::Base
+  kienaide
+end
+```
+
+```
+post.protected = true
+post.save
+
+post.destroy
+post.destroyed? # false
+```
 
 ## Contributing
 
