@@ -8,17 +8,18 @@ RSpec.describe Kienaide do
   let!(:post) { Post.create(content: 'demo', protected: protected) }
   after { Post.delete_all }
 
-  describe 'kinaide' do
+  describe '#destroyed?' do
     before { post.destroy }
-    subject { post.destroyed? }
-    context 'when not be protected' do
+    subject { post }
+
+    context 'when not protected' do
       let(:protected) { false }
-      it { is_expected.to be true }
+      it { is_expected.to be_destroyed }
     end
 
-    context 'when be protected' do
+    context 'when protected' do
       let(:protected) { true }
-      it { is_expected.to be false }
+      it { is_expected.not_to be_destroyed }
     end
   end
 end
